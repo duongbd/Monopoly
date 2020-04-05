@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Property
+  - Brown
+  - Ocean
+  - Pink
+  - Orange
+  - Red
+  - Banana
+  - Green
+  - Sky
+  - Station
+  - Factory
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Text
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Board
+    uniqueID: 3647707295
+    locked: 0
+  - name: UI
+    uniqueID: 746291325
+    locked: 0
+  - name: UI1
+    uniqueID: 3658750717
+    locked: 0
+  - name: UI2
+    uniqueID: 1355123245
+    locked: 0
+  - name: UI3
+    uniqueID: 4090520103
+    locked: 0
+  - name: Player
+    uniqueID: 4245069717
+    locked: 0
+  - name: Modal
+    uniqueID: 1873977953
+    locked: 0
+  - name: ModalContent
+    uniqueID: 2060269059
+    locked: 0
