@@ -5,35 +5,90 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 
+public struct Message
+{
+    public string text;
+    public string yesText;
+    public string noText;
+    public UnityAction yesEvent;
+    public UnityAction noEvent;
+    public int type;
+    public Message(string text, string yesText, string noText, UnityAction yesEvent, UnityAction noEvent)
+    {
+        this.type = 0;
+        this.text = text;
+        this.noText = noText;
+        this.yesText = yesText;
+        this.noEvent = noEvent;
+        this.yesEvent = yesEvent;
+    }
+    public Message(string text, string okText, UnityAction okEvent)
+    {
+        this.type = 1;
+        this.text = text;
+        this.noText = okText;
+        this.yesText = "";
+        this.noEvent = okEvent;
+        this.yesEvent = null;
+    }
+}
+
 public class Modal : MonoBehaviour
 {
-    public static GameObject modal;
-    public GameObject noButton;
-    public GameObject yesButton;
-    public TextMeshProUGUI yesButtonText;
-    public TextMeshProUGUI noButtonText;
-    public TextMeshProUGUI text;
+    private static GameObject modalController;
+    private static GameObject modal;
+    private GameObject noButton;
+    private GameObject yesButton;
+    private TextMeshProUGUI yesButtonText;
+    private TextMeshProUGUI noButtonText;
+    private TextMeshProUGUI text;
+    private Queue<Message> messages;
+    private Message? displayMessage;
 
     public static Modal instance()
     {
-        return modal.GetComponent<Modal>();
+        return modalController.GetComponent<Modal>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        messages = new Queue<Message>();
+        modalController = GameObject.Find("ModalController");
         modal = GameObject.Find("Modal");
-        noButton = GameObject.Find(gameObject.name + "/NoButton");
-        yesButton = GameObject.Find(gameObject.name + "/YesButton");
-        yesButtonText = GameObject.Find(gameObject.name + "/YesButton/YesButtonText").GetComponent<TextMeshProUGUI>();
-        noButtonText = GameObject.Find(gameObject.name + "/NoButton/NoButtonText").GetComponent<TextMeshProUGUI>();
-        text = GameObject.Find(gameObject.name + "/Text").GetComponent<TextMeshProUGUI>();
+        noButton = GameObject.Find("Modal/NoButton");
+        yesButton = GameObject.Find("Modal/YesButton");
+        yesButtonText = GameObject.Find("Modal/YesButton/YesButtonText").GetComponent<TextMeshProUGUI>();
+        noButtonText = GameObject.Find("Modal/NoButton/NoButtonText").GetComponent<TextMeshProUGUI>();
+        text = GameObject.Find("Modal/Text").GetComponent<TextMeshProUGUI>();
         modal.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (GameController.waitModal == false && messages.Count > 0)
+        {
+            if (messages.Peek().type == 0)
+            {
+                showModal(messages.Peek().text, messages.Peek().yesText, messages.Peek().noText, messages.Peek().yesEvent, messages.Peek().noEvent);
+            } else
+            {
+                showModal(messages.Peek().text, messages.Peek().noText, messages.Peek().noEvent);
+            }
+            messages.Dequeue();
+        }
     }
 
     public void showModal(string modalText, string yesText, string noText, UnityAction yesEvent, UnityAction noEvent)
     {
+        Message message = new Message(modalText, yesText, noText, yesEvent, noEvent);
+        if (GameController.waitModal == true && !displayMessage.Equals(message))
+        {
+            if (!messages.Contains(message)) messages.Enqueue(message);
+            return;
+        }
         GameController.waitModal = true;
+        displayMessage = message;
         text.SetText(modalText);
         noButtonText.SetText(noText);
         yesButtonText.SetText(yesText);
@@ -54,7 +109,14 @@ public class Modal : MonoBehaviour
 
     public void showModal(string modalText, string okText, UnityAction okEvent)
     {
+        Message message = new Message(modalText, okText, okEvent);
+        if (GameController.waitModal == true && !displayMessage.Equals(message))
+        {
+            if (!messages.Contains(message)) messages.Enqueue(message);
+            return;
+        }
         GameController.waitModal = true;
+        displayMessage = message;
         text.SetText(modalText);
         noButtonText.SetText(okText);
 
@@ -70,6 +132,7 @@ public class Modal : MonoBehaviour
     private void closeModal()
     {
         modal.SetActive(false);
+        displayMessage = null;
         GameController.waitModal = false;
     }
 }

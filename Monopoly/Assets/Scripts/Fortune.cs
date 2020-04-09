@@ -18,6 +18,16 @@ public class Fortune : Block
 
     public override void activate()
     {
-        Debug.Log(blockName);
+        int rand = 0;
+        switch (rand)
+        {
+            case 0:
+                Modal.instance().showModal("Khí Vận:\nBạn khai trương nhà hát, thu của mỗi người chơi 50Đ tiền vé.", "OK", () => {
+                    GameController.getPlayersNotInTurn().ForEach((player) => {
+                        player.pay(GameController.playerInTurn(), 50, "Tiền vé");
+                    });
+                });
+                break;
+        }
     }
 }

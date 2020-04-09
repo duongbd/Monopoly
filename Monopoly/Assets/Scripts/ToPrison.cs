@@ -19,7 +19,7 @@ public class ToPrison : Block
     public override void activate()
     {
         Player player = GameController.playerInTurn();
-        Modal.instance().showModal("Bạn đã bị bắt vào tù, bạn có thể ra tù sau 3 lượt hoặc đổ được xúc xắc 2 mặt giống nhau, hoặc trả 50Đ ngay bây giờ để không phải vào tù. Bạn có muốn trả không?", "Có", "Không",
+        Modal.instance().showModal("Bạn đã bị bắt vào tù, bạn có thể ra tù sau 3 lượt hoặc đổ được xúc xắc 2 mặt giống nhau, hoặc trả 50Đ ngay bây giờ để không phải vào tù.", "Trả 50Đ", "Vào tù",
             () => {
                 if (player.getFund() < 50)
                 {

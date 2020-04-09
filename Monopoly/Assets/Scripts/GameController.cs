@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour
         if (dice[0].ifCoroutineAllowed() && dice[1].ifCoroutineAllowed() && rolled == false && rollValue > 0)
         {
             rolled = true;
-            if (playerInTurn().inPrison > 0)
+            if (playerInTurn().inPrison >= 0)
             {
                 activated = true;
                 if (dice[0].getDiceSideThrown() == dice[1].getDiceSideThrown())
@@ -85,19 +85,23 @@ public class GameController : MonoBehaviour
                 }
             } else
             {
-                player[turn].move(rollValue);
-                moveActor();
+                movePlayerInTurn(rollValue, false);
             }
         }
-        if (rolled && actor[player[turn].represent].GetComponent<FollowThePath>().moveAllowed == false && activated == false)
+        if (rolled && playerInTurnActor().moveAllowed == false && activated == false)
         {
             if (player[turn].position - rollValue < 0) Board.instance().getBlock(0).activate();
-            else Board.instance().getBlock(player[turn].position).activate();
+            else Board.instance().getPlayerInTurnBlock().activate();
             activated = true;
         }
-        if (actor[player[turn].represent].GetComponent<FollowThePath>().target == player[turn].position + 1)
+        if (!playerInTurnActor().backward() && playerInTurnActor().target == player[turn].position + 1)
         {
-            actor[player[turn].represent].GetComponent<FollowThePath>().moveAllowed = false;
+            playerInTurnActor().moveAllowed = false;
+            turnLock = false;
+        }
+        if (playerInTurnActor().backward() && playerInTurnActor().target == player[turn].position - 1)
+        {
+            playerInTurnActor().moveAllowed = false;
             turnLock = false;
         }
         for (int i = 0; i<4; i++)
@@ -132,6 +136,11 @@ public class GameController : MonoBehaviour
         rolled = false;
         rollValue = 0;
         activated = false;
+        if (playerInTurn().inPrison == 0)
+        {
+            playerInTurn().inPrison = -1;
+            Modal.instance().showModal("Bạn đã được ra tù!", "OK", () => { });
+        }
         if (playerInTurn().inPrison > 0)
         {
             playerInTurn().inPrison--;
@@ -155,11 +164,6 @@ public class GameController : MonoBehaviour
                     rollTheDice();
                 }
             );
-        }
-        if (playerInTurn().inPrison == 0)
-        {
-            playerInTurn().inPrison = -1;
-            Modal.instance().showModal("Bạn đã được ra tù!", "OK", () => { });
         }
     }
 
@@ -198,17 +202,36 @@ public class GameController : MonoBehaviour
         moveActor(50f);
     }
 
-    public static void movePlayerInTurn(int i)
+    public static void movePlayerInTurn(int steps, bool backward = false)
     {
-        playerInTurn().position = i;
-        moveActor();
-        activated = false;
+        if (!backward) playerInTurn().move(steps);
+        else playerInTurn().moveBack(steps);
+        moveActor(5f, backward);
     }
 
-    private static void moveActor(float speed = 5f)
+    public static List<Player> getPlayersNotInTurn()
     {
-        FollowThePath curActor = actor[player[turn].represent].GetComponent<FollowThePath>();
+        List<Player> players = new List<Player>();
+        foreach (Player player in player)
+        {
+            if (player != playerInTurn() && player.bankrupt == false)
+            {
+                players.Add(player);
+            }
+        }
+        return players;
+    }
+
+    public static FollowThePath playerInTurnActor()
+    {
+        return actor[player[turn].represent].GetComponent<FollowThePath>();
+    }
+
+    private static void moveActor(float speed = 5f, bool backward = false)
+    {
+        FollowThePath curActor = playerInTurnActor();
         curActor.setSpeed(speed);
+        curActor.setDirection(backward);
         curActor.moveAllowed = true;
         turnLock = true;
     }

@@ -59,6 +59,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void moveBack(int steps)
+    {
+        if (position - steps < 0)
+        {
+            position = position - steps + 40;
+        }
+        else
+        {
+            position = position - steps;
+        }
+    }
+
     public int getFund()
     {
         return fund;
@@ -89,7 +101,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void pay(Player owner, int rent)
+    public void pay(Player owner, int rent, string note = null)
     {
         if (fund < rent)
         {
@@ -99,8 +111,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                inDept = true;
-                debts.Add(new Debt(rent, owner));
+                debit(rent, owner, note);
             }
         }
         else
@@ -111,7 +122,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void pay(int value)
+    public void pay(int value, string note = null)
     {
         if (fund < value)
         {
@@ -121,8 +132,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                inDept = true;
-                debts.Add(new Debt(value));
+                debit(value, note);
             }
         }
         else

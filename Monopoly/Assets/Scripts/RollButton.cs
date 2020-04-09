@@ -27,8 +27,14 @@ public class RollButton : MonoBehaviour
     {
         if (GameController.waitModal == false)
         {
-            if (GameController.tradingMode) GameController.tradingModeOff();
-            GameController.rollTheDice();
+            if (GameController.playerInTurn().inDept)
+            {
+                Modal.instance().showModal("Bạn phải trả nợ trước khi đổ xúc xắc!", "OK", () => { });
+            } else
+            {
+                if (GameController.tradingMode) GameController.tradingModeOff();
+                GameController.rollTheDice();
+            }
         }
     }
 }

@@ -62,7 +62,7 @@ public abstract class Buyable : Block
                 }
                 else
                 {
-                    Modal.instance().showModal("Ban đã đi vào ô của " + owner.playerName + " phải trả " + rent + "Đ", "OK",
+                    Modal.instance().showModal("Bạn đã đi vào ô của " + owner.playerName + " phải trả " + rent + "Đ", "OK",
                         () => {
                             player.pay(owner, rent);
                         }

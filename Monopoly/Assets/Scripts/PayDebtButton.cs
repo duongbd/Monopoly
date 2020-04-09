@@ -25,6 +25,10 @@ public class PayDebtButton : MonoBehaviour
 
     private void payDebt()
     {
+        if (GameController.waitModal)
+        {
+            return;
+        }
         Player player = GameController.playerInTurn();
         List<Player> creditors = new List<Player>();
         string text = "Trả nợ: \n";

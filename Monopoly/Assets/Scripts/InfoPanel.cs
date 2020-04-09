@@ -129,6 +129,10 @@ public class InfoPanel : MonoBehaviour
 
     private void sellBlockEvent(Buyable block)
     {
+        if (GameController.waitModal)
+        {
+            return;
+        }
         int amount;
         if (block.GetComponent<Buildable>() != null)
         {
@@ -150,6 +154,10 @@ public class InfoPanel : MonoBehaviour
 
     private void sellPropertyEvent(Buildable block)
     {
+        if (GameController.waitModal)
+        {
+            return;
+        }
         string text;
         if (block.getProperties() < 5)
         {
@@ -171,6 +179,10 @@ public class InfoPanel : MonoBehaviour
 
     private void buyPropertyEvent(Buildable block)
     {
+        if (GameController.waitModal)
+        {
+            return;
+        }
         Player player = GameController.playerInTurn();
         if (player.getFund() >= block.propertyPrice)
         {

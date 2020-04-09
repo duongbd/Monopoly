@@ -31,8 +31,10 @@ public class Dice : MonoBehaviour {
         }
 
         diceSideThrown = randomDiceSide + 1;
+        //diceSideThrown = 1;
 
         GameController.rollValue += diceSideThrown;
+        //GameController.rollValue = 7;
 
         yield return new WaitForSeconds(1.5f);
 

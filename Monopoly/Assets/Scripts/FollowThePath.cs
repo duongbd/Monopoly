@@ -4,6 +4,8 @@ using System;
 public class FollowThePath : MonoBehaviour {
     private float moveSpeed = 5f;
 
+    private bool moveBack = false;
+
     public int target = 0;
 
     public bool moveAllowed = false;
@@ -29,6 +31,10 @@ public class FollowThePath : MonoBehaviour {
         {
             target = target % 40;
         }
+        if (target < 0)
+        {
+            target = target + 40;
+        }
         transform.position = Vector2.MoveTowards(
             transform.position, 
             path[target].transform.position, 
@@ -37,12 +43,28 @@ public class FollowThePath : MonoBehaviour {
         
         if (Vector3.Distance(transform.position, path[target].transform.position) < 0.5)
         {
-            target += 1;
+            if (!moveBack) target += 1;
+            else target -= 1;
         }
     }
 
     public void setSpeed(float speed)
     {
         moveSpeed = speed;
+    }
+
+    public void setDirection(bool backward)
+    {
+        if (moveBack != backward)
+        {
+            if (backward) target -= 2;
+            else target += 2;
+        }
+        moveBack = backward;
+    }
+
+    public bool backward()
+    {
+        return moveBack;
     }
 }
