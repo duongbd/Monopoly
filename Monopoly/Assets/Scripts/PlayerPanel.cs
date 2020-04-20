@@ -10,7 +10,7 @@ public class PlayerPanel : MonoBehaviour
     private TextMeshProUGUI netWorth;
     private GameObject bankrupt;
 
-    private void Start()
+    private void Awake()
     {
         playerName = GameObject.Find(gameObject.name + "/Name").GetComponent<TextMeshProUGUI>();
         fund = GameObject.Find(gameObject.name + "/Fund").GetComponent<TextMeshProUGUI>();

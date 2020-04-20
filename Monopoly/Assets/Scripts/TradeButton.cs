@@ -22,6 +22,14 @@ public class TradeButton : MonoBehaviour
         {
             GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/button");
         }
+        if (GameController.turnLock)
+        {
+            GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            GetComponent<Button>().interactable = true;
+        }
     }
 
     private void trade()

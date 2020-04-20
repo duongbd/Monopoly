@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
     private static Dice[] dice;
     private static int turn = 0;
 
+    public static Stack<string> chart;
+    public static bool gameOver = false;
     public static bool activated = false;
     public static int rollValue = 0;
     public static bool rolled = false;
@@ -24,6 +26,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         player = new Player[] {
             GameObject.Find("Player1").GetComponent<Player>(),
             GameObject.Find("Player2").GetComponent<Player>(),
@@ -53,17 +56,37 @@ public class GameController : MonoBehaviour
             GameObject.Find("PlayerPanel4").GetComponent<PlayerPanel>()
         };
         turnFrame = GameObject.Find("TurnFrame");
-        turn = 0;
+        chart = new Stack<string>();
         for (int i = 0; i < player.Length; i++)
         {
+            try {
+                player[i].playerName = GameSetting.getName(i);
+                player[i].represent = GameSetting.getRepresent(i);
+                Destroy(GameObject.Find("GameSetting"));
+            }
+            catch (System.NullReferenceException)
+            {
+                player[i].playerName = "Player " + (i + 1);
+                player[i].represent = i;
+            }
             avatar[player[i].represent].transform.position = playerPanel[i].transform.position + new Vector3(-129,50,0);
             playerPanel[i].updatePanel(player[i].playerName, player[i].getFund(), player[i].calNetWorth());
         }
+        turn = 0;
+        //for (int i = 0; i<3; i++)
+        //{
+        //    player[i].declareBankrupt();
+        //}
+        StartCoroutine("determineTurn");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameOver)
+        {
+            return;
+        }
         if (dice[0].ifCoroutineAllowed() && dice[1].ifCoroutineAllowed() && rolled == false && rollValue > 0)
         {
             rolled = true;
@@ -113,9 +136,21 @@ public class GameController : MonoBehaviour
                 {
                     playerPanel[i].updateBankruptStatus();
                     actor[player[i].represent].SetActive(false);
+                    chart.Push(player[i].playerName);
                 };
                 player[i].needUpdate = false;
             }
+        }
+        if(playersLeft() == 1)
+        {
+            gameOver = true;
+            chart.Push(playerInTurn().playerName);
+            Modal.instance().showModal("Game Over!", "OK", 
+                () => {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+                },
+                true
+            );
         }
     }
 
@@ -234,5 +269,66 @@ public class GameController : MonoBehaviour
         curActor.setDirection(backward);
         curActor.moveAllowed = true;
         turnLock = true;
+    }
+
+    private IEnumerator determineTurn()
+    {
+        turnLock = true;
+        int[] values = new int[4] { 0, 0, 0, 0 };
+        for (int i=0; i<4; i++)
+        {
+            activated = true;
+            rolled = true;
+            Modal.instance().showModal("Đổ xúc xắc xác định lượt.\n" +
+                "- " + player[0].playerName + ": " + values[0] + "\n" +
+                "- " + player[1].playerName + ": " + values[1] + "\n" +
+                "- " + player[2].playerName + ": " + values[2] + "\n" +
+                "- " + player[3].playerName + ": " + values[3] + "\n",
+                "Đổ xúc xắc",
+                () => {
+                    rollTheDice();
+                }
+            );
+            yield return new WaitUntil(() => dice[0].ifCoroutineAllowed() && dice[1].ifCoroutineAllowed() && rollValue > 0);
+            values[turn] = rollValue;
+            endTurn();
+        }
+        System.Array.Sort(values, player, new myCompare());
+        for (int i = 0; i < player.Length; i++)
+        {
+            avatar[player[i].represent].transform.position = playerPanel[i].transform.position + new Vector3(-129, 50, 0);
+            playerPanel[i].updatePanel(player[i].playerName, player[i].getFund(), player[i].calNetWorth());
+        }
+        Modal.instance().showModal("Thứ tự chơi:\n" +
+                "1. " + player[0].playerName + ": " + values[0] + "\n" +
+                "2. " + player[1].playerName + ": " + values[1] + "\n" +
+                "3. " + player[2].playerName + ": " + values[2] + "\n" +
+                "4. " + player[3].playerName + ": " + values[3] + "\n",
+                "OK",
+                () => {
+                }
+            );
+        turnLock = false;
+    }
+
+    private int playersLeft()
+    {
+        int count = 4;
+        foreach(Player pl in player)
+        {
+            if (pl.bankrupt)
+            {
+                count--;
+            }
+        }
+        return count;
+    }
+}
+
+public class myCompare : IComparer<int>
+{
+    public int Compare(int x, int y)
+    {
+        return y - x;
     }
 }

@@ -15,7 +15,7 @@ public class BuyBlockButton : MonoBehaviour
     void Update()
     {
         Block block = Board.instance().getPlayerInTurnBlock();
-        if (GameController.rolled && block.GetComponent<Buyable>() != null && block.GetComponent<Buyable>().getOwner() == null)
+        if (GameController.rolled && block.GetComponent<Buyable>() != null && block.GetComponent<Buyable>().getOwner() == null && !GameController.turnLock)
         {
             GetComponent<Button>().interactable = true;
         } else

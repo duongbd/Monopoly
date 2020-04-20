@@ -5,7 +5,7 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     private static Board board;
-    public GameObject[] blocks;   
+    public GameObject[] blocks;
 
     public static Board instance()
     {

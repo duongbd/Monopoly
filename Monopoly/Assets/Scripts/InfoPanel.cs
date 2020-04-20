@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
@@ -33,6 +34,9 @@ public class InfoPanel : MonoBehaviour
         owner = GameObject.Find("Owner").GetComponent<TextMeshProUGUI>();
         rent = GameObject.Find("Rent").GetComponent<TextMeshProUGUI>();
         propertiesImages = GameObject.FindGameObjectsWithTag("Property");
+        Array.Sort(propertiesImages, (GameObject a, GameObject b) => {
+            return a.transform.GetSiblingIndex() - b.transform.GetSiblingIndex();
+        });
         info = GameObject.Find("Info");
         properties = GameObject.Find("Properties");
         buyButton = GameObject.Find("BuyButton").GetComponent<Button>();

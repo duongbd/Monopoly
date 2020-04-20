@@ -51,7 +51,7 @@ public class Modal : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         messages = new Queue<Message>();
         modalController = GameObject.Find("ModalController");
@@ -79,12 +79,17 @@ public class Modal : MonoBehaviour
         }
     }
 
-    public void showModal(string modalText, string yesText, string noText, UnityAction yesEvent, UnityAction noEvent)
+    public void showModal(string modalText, string yesText, string noText, UnityAction yesEvent, UnityAction noEvent, bool prior = false)
     {
         Message message = new Message(modalText, yesText, noText, yesEvent, noEvent);
         if (GameController.waitModal == true && !displayMessage.Equals(message))
         {
-            if (!messages.Contains(message)) messages.Enqueue(message);
+            if (!messages.Contains(message) && !prior) messages.Enqueue(message);
+            if (!messages.Contains(message) && prior)
+            {
+                addToFrontOfQueue(message);
+                GameController.waitModal = false;
+            }
             return;
         }
         GameController.waitModal = true;
@@ -107,12 +112,17 @@ public class Modal : MonoBehaviour
         modal.SetActive(true);
     }
 
-    public void showModal(string modalText, string okText, UnityAction okEvent)
+    public void showModal(string modalText, string okText, UnityAction okEvent, bool prior = false)
     {
         Message message = new Message(modalText, okText, okEvent);
         if (GameController.waitModal == true && !displayMessage.Equals(message))
         {
-            if (!messages.Contains(message)) messages.Enqueue(message);
+            if (!messages.Contains(message) && !prior) messages.Enqueue(message);
+            if (!messages.Contains(message) && prior)
+            {
+                addToFrontOfQueue(message);
+                GameController.waitModal = false;
+            }
             return;
         }
         GameController.waitModal = true;
@@ -134,5 +144,21 @@ public class Modal : MonoBehaviour
         modal.SetActive(false);
         displayMessage = null;
         GameController.waitModal = false;
+    }
+
+    private void addToFrontOfQueue(Message mess)
+    {
+        Message[] clone = new Message[messages.Count];
+        messages.CopyTo(clone, 0);
+        messages.Clear();
+        messages.Enqueue(mess);
+        if (displayMessage != null)
+        {
+            messages.Enqueue((Message)displayMessage);
+        }
+        for (int i = 0; i< clone.Length; i++)
+        {
+            messages.Enqueue(clone[i]);
+        }
     }
 }
