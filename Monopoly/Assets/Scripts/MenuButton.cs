@@ -27,6 +27,7 @@ public class MenuButton : MonoBehaviour
             case 1:
                 Modal.instance().showModal("Bạn có chắc muốn về trang chủ?", "Có", "Không",
                     () => {
+                        Destroy(Modal.instance());
                         UnityEngine.SceneManagement.SceneManager.LoadScene("GameSetting");
                     },
                     () => {

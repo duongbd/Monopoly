@@ -10,7 +10,7 @@ public class Fortune : Block
         switch (rand)
         {
             case 0:
-                Modal.instance().showModal("Khí Vận:\nBạn khai trương nhà hát, thu của mỗi người chơi 50Đ tiền vé.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nBạn khai trương nhà hát, thu của mỗi người chơi <color=#216C2A><b>50Đ</b></color> tiền vé.", "OK", () => {
                     GameController.getPlayersNotInTurn().ForEach((player) => {
                         player.pay(GameController.playerInTurn(), 50, "Tiền vé");
                     });
@@ -18,7 +18,7 @@ public class Fortune : Block
                 break;
 
             case 1:
-                Modal.instance().showModal("Khí Vận:\nTrả viện phí 100Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nTrả viện phí <color=#aa0115><b>100Đ</b></color>.", "OK", () => {
                     if (GameController.playerInTurn().getFund() < 100)
                     {
                         if (GameController.playerInTurn().calNetWorth() < 100)
@@ -28,7 +28,7 @@ public class Fortune : Block
                         else
                         {
                             GameController.playerInTurn().debit(100);
-                            Modal.instance().showModal("Bạn không đủ " + 100 + "Đ. Cần bán tài sản để trả!", "OK", () => { });
+                            Modal.instance().showModal("Bạn không đủ <color=#aa0115><b>" + 100 + "Đ</b></color>. Cần bán tài sản để trả!", "OK", () => { });
                         }
                     }
                     else
@@ -39,68 +39,68 @@ public class Fortune : Block
                 break;
 
             case 2:
-                Modal.instance().showModal("Khí Vận:\nBán cổ phiếu được 45Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nBán cổ phiếu được <color=#216C2A><b>45Đ</b></color>.", "OK", () => {
                     GameController.playerInTurn().addFund(45);
                 });
                 break;
 
             case 3:
-                Modal.instance().showModal("Khí Vận:\nNhận tiền bảo hiểm nhân thọ 100Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nNhận tiền bảo hiểm nhân thọ <color=#216C2A><b>100Đ</b></color>.", "OK", () => {
                     GameController.playerInTurn().addFund(100);
                 });
                 break;
 
             case 4:
-                Modal.instance().showModal("Khí Vận:\nThu phí dịch vụ, nhận 25Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nThu phí dịch vụ, nhận <color=#216C2A><b>25Đ</b></color>.", "OK", () => {
                     GameController.playerInTurn().addFund(25);
                 });
                 break;
 
             case 5:
-                Modal.instance().showModal("Khí Vận:\nTiền thừa kế 100Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nTiền thừa kế <color=#216C2A><b>100Đ</b></color>.", "OK", () => {
                     GameController.playerInTurn().addFund(100);
                 });
                 break;
 
             case 6:
-                Modal.instance().showModal("Khí Vận:\nĐạt giải Á quân hoa hậu, thưởng 10Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nĐạt giải Á quân hoa hậu, thưởng <color=#216C2A><b>10Đ</b></color>.", "OK", () => {
                     GameController.playerInTurn().addFund(10);
                 });
                 break;
 
             case 7:
-                Modal.instance().showModal("Khí Vận:\nDo sai sót của ngân hàng, nhận 200Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nDo sai sót của ngân hàng, nhận <color=#216C2A><b>200Đ</b></color>.", "OK", () => {
                     GameController.playerInTurn().addFund(200);
                 });
                 break;
 
             case 8:
-                Modal.instance().showModal("Khí Vận:\nĐến hạn thu ngân sách Giáng sinh, nhận 100Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nĐến hạn thu ngân sách Giáng sinh, nhận <color=#216C2A><b>100Đ</b></color>.", "OK", () => {
                     GameController.playerInTurn().addFund(100);
                 });
                 break;
 
             case 9:
-                Modal.instance().showModal("Khí Vận:\nHoàn trả thuế thu nhập, nhận 20Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nHoàn trả thuế thu nhập, nhận <color=#216C2A><b>20Đ</b></color>.", "OK", () => {
                     GameController.playerInTurn().addFund(20);
                 });
                 break;
 
             case 10:
-                Modal.instance().showModal("Khí Vận:\nVào tù!", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\n<b>Vào tù</b>!", "OK", () => {
                     Board.instance().getBlock(30).activate();
                 });
                 break;
 
             case 11:
-                Modal.instance().showModal("Khí vận:\nVề Khởi hành nhận 200Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nVề <color=#22c4ff><b>Khởi hành</b></color> nhận <color=#216C2A><b>200Đ</b></color>.", "OK", () => {
                     GameController.jumpPlayerInTurn(0);
                     Board.instance().getPlayerInTurnBlock().activate();
                 });
                 break;
 
             case 12:
-                Modal.instance().showModal("Khí Vận:\nPhí khám bệnh, trả 50Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#f83d3d><b>Khí Vận:</b></color></size>\nPhí khám bệnh, trả <color=#aa0115><b>50Đ</b></color>.", "OK", () => {
                     if (GameController.playerInTurn().getFund() < 50)
                     {
                         if (GameController.playerInTurn().calNetWorth() < 50)
@@ -110,7 +110,7 @@ public class Fortune : Block
                         else
                         {
                             GameController.playerInTurn().debit(50);
-                            Modal.instance().showModal("Bạn không đủ " + 50 + "Đ. Cần bán tài sản để trả!", "OK", () => { });
+                            Modal.instance().showModal("Bạn không đủ <color=#aa0115><b>" + 50 + "Đ</b></color>. Cần bán tài sản để trả!", "OK", () => { });
                         }
                     }
                     else

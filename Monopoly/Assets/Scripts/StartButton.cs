@@ -16,6 +16,7 @@ public class StartButton : MonoBehaviour
     {
         if (GameSetting.completed())
         {
+            Destroy(Modal.instance());
             SceneManager.LoadScene("MainGame");
         } else
         {

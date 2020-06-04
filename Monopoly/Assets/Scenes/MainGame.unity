@@ -946,6 +946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de029fcac17f3f4590cfde827cfa015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 1
+  easeType: 0
 --- !u!114 &78280547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1427,7 +1429,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 124996303}
   m_TextComponent: {fileID: 1806902006}
   m_materialReferenceIndex: 1
@@ -3491,7 +3493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &221480494
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4063,6 +4065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 0b7edc051ad73994b9382edf33001c34, type: 3}
   blockName: "Cung \u0110\xECnh Hu\u1EBF"
+  color: 
   price: 220
   propertyPrice: 150
   rent: 120000005a000000fa000000bc0200006b0300001a040000
@@ -5400,6 +5403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: a959bc85bb80fbb42b5eae14747d8fd0, type: 3}
   blockName: "C\u1EA7u R\u1ED3ng \u0110\xE0 N\u1EB5ng"
+  color: 
   price: 220
   propertyPrice: 150
   rent: 120000005a000000fa000000bc0200006b0300001a040000
@@ -6062,6 +6066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 307cead3fc38e7644a2d6c0a0679245b, type: 3}
   blockName: "Th\xE1p R\xF9a"
+  color: 
   price: 120
   propertyPrice: 50
   rent: 0800000028000000640000002c010000c201000058020000
@@ -6586,6 +6591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 03669904696f38849aa4cb0ee78925db, type: 3}
   blockName: "\u0110\u01B0\u1EDDng Nguy\u1EC5n Hu\u1EC7"
+  color: 
   price: 300
   propertyPrice: 200
   rent: 1a0000008200000086010000840300004c040000fb040000
@@ -9392,6 +9398,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de029fcac17f3f4590cfde827cfa015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 1
+  easeType: 0
 --- !u!114 &656935741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10284,7 +10292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 239a9ac16c2359f49a28076cc33f9063, type: 3}
-  blockName: "Nh\xE0 T\xF9"
+  blockName: "Th\u0103m T\xF9"
 --- !u!61 &748859521
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10441,6 +10449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 23ef747b194289f42a9677e21043e59d, type: 3}
   blockName: "Ga \u0110\xE0 N\u1EB5ng"
+  color: 
   price: 200
 --- !u!61 &754845706
 BoxCollider2D:
@@ -11410,6 +11419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 8b1e30234442a8045ab406c890863622, type: 3}
   blockName: "Nh\xE0 M\xE1y \u0110i\u1EC7n"
+  color: 
   price: 150
 --- !u!61 &853351437
 BoxCollider2D:
@@ -11935,6 +11945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 173225a4d7c009249835f5a6a677dbc8, type: 3}
   blockName: "Nh\xE0 Th\u1EDD \u0110\u1EE9c B\xE0"
+  color: 
   price: 260
   propertyPrice: 150
   rent: 160000006e0000004a01000020030000cf0300007e040000
@@ -13460,6 +13471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: c7f905687f848aa48970c6e61de2673d, type: 3}
   blockName: Landmark 81
+  color: 
   price: 320
   propertyPrice: 200
   rent: 1c00000096000000c2010000e8030000b004000078050000
@@ -13918,6 +13930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 6b7faf1a0df58c84fbfd698f946f80a9, type: 3}
   blockName: "Qu\u1EA3ng Tr\u01B0\u1EDDng Ba \u0110\xECnh"
+  color: 
   price: 140
   propertyPrice: 100
   rent: 0a0000003200000096000000c201000071020000ee020000
@@ -14451,6 +14464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: af0e723976f064f428f25360101be842, type: 3}
   blockName: "V\u0103n Mi\u1EBFu"
+  color: 
   price: 160
   propertyPrice: 100
   rent: 0c0000003c000000b4000000f4010000bc02000084030000
@@ -14698,6 +14712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 47477c61af667dd42aaeb839fb2dd8b9, type: 3}
   blockName: "Ga H\xE0 N\u1ED9i"
+  color: 
   price: 200
 --- !u!114 &1270576013
 MonoBehaviour:
@@ -15352,6 +15367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de029fcac17f3f4590cfde827cfa015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 1
+  easeType: 0
 --- !u!114 &1327550962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15658,6 +15675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 611201eecf6f97942b940c517275b715, type: 3}
   blockName: "B\u01B0u \u0110i\u1EC7n H\xE0 N\u1ED9i"
+  color: 
   price: 100
   propertyPrice: 50
   rent: 060000001e0000005a0000000e0100009001000026020000
@@ -15880,6 +15898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: d45f550e22898eb48a468c2e7fee64df, type: 3}
   blockName: "S\u01A1n \u0110o\xF2ng"
+  color: 
   price: 180
   propertyPrice: 100
   rent: 0e00000046000000c800000026020000ee020000b6030000
@@ -16580,6 +16599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 76c63eb024ed2374ea4b75e074bdbeef, type: 3}
   blockName: "Ph\xFA Qu\u1ED1c"
+  color: 
   price: 400
   propertyPrice: 200
   rent: 32000000c80000005802000078050000a4060000d0070000
@@ -16957,6 +16977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 0da132d993202bc4ebb44a82b10c9c96, type: 3}
   blockName: "B\u1EBFn Nh\xE0 R\u1ED3ng"
+  color: 
   price: 280
   propertyPrice: 150
   rent: 1800000078000000680100005203000001040000b0040000
@@ -17608,6 +17629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: c0839cb3cfe45df488b13a66a3fd863e, type: 3}
   blockName: "Ch\u1EE3 \u0110\u1ED3ng Xu\xE2n"
+  color: 
   price: 60
   propertyPrice: 50
   rent: 04000000140000003c000000b400000040010000c2010000
@@ -18203,7 +18225,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512386040}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -18517,6 +18539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: b0678730145934943b8c39aca09ca3c9, type: 3}
   blockName: "Tr\u01B0\u1EDDng Sa"
+  color: 
   price: 350
   propertyPrice: 200
   rent: 23000000af000000f40100004c04000014050000dc050000
@@ -19216,6 +19239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 185c3b1b0ae42474191c0ac563265bfc, type: 3}
   blockName: "Tr\xE0ng An"
+  color: 
   price: 200
   propertyPrice: 100
   rent: 1000000050000000dc0000005802000020030000e8030000
@@ -19775,6 +19799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: e329ee50f87bbd74b9d0541313f0e30e, type: 3}
   blockName: "Ph\u1ED1 C\u1ED5"
+  color: 
   price: 60
   propertyPrice: 50
   rent: 020000000a0000001e0000005a000000a0000000fa000000
@@ -20158,6 +20183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 47488aee3e74e5c4598291576e8e01fe, type: 3}
   blockName: "H\u1ED9i An"
+  color: 
   price: 240
   propertyPrice: 150
   rent: 14000000640000002c010000ee0200009d0300004c040000
@@ -21063,7 +21089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Content: {fileID: 2088694832}
   m_Horizontal: 0
-  m_Vertical: 1
+  m_Vertical: 0
   m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
@@ -21246,6 +21272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 89507716c53c87b43ba6339ef0649ae3, type: 3}
   blockName: "V\u1ECBnh H\u1EA1 Long"
+  color: 
   price: 180
   propertyPrice: 100
   rent: 0e00000046000000c800000026020000ee020000b6030000
@@ -21771,6 +21798,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 71a01fd1e57daf649b957e94116a280b, type: 3}
   blockName: "Nh\xE0 M\xE1y N\u01B0\u1EDBc"
+  color: 
   price: 150
 --- !u!61 &1763373396
 BoxCollider2D:
@@ -22140,6 +22168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 0c59a0bb3bde8a647bfed18a3612a6dc, type: 3}
   blockName: "Ch\u1EE3 B\u1EBFn Th\xE0nh"
+  color: 
   price: 300
   propertyPrice: 200
   rent: 1a0000008200000086010000840300004c040000fb040000
@@ -22744,6 +22773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 592c5fe932cda014d9018fabdf93928f, type: 3}
   blockName: "Dinh \u0110\u1ED9c L\u1EADp"
+  color: 
   price: 260
   propertyPrice: 150
   rent: 160000006e0000004a01000020030000cf0300007e040000
@@ -23554,6 +23584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 5431e9a15da0cdd4f9c0cc5af8aa1bf8, type: 3}
   blockName: "Ga S\xE0i G\xF2n"
+  color: 
   price: 200
 --- !u!61 &1913711246
 BoxCollider2D:
@@ -24775,6 +24806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: c978d5d88a95cb7418b3c8571171dc48, type: 3}
   blockName: "Ho\xE0ng Th\xE0nh Th\u0103ng Long"
+  color: 
   price: 140
   propertyPrice: 100
   rent: 0a0000003200000096000000c201000071020000ee020000
@@ -24922,6 +24954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de029fcac17f3f4590cfde827cfa015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 1
+  easeType: 0
 --- !u!114 &1977058357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25503,6 +25537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: 4c935d4abeb9adf48a5fa4efc4a29705, type: 3}
   blockName: Ga Vinh
+  color: 
   price: 200
 --- !u!61 &2025270799
 BoxCollider2D:
@@ -25878,6 +25913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 21300000, guid: b300f706caca80443bcdd50f63b7d25f, type: 3}
   blockName: "Nh\xE0 H\xE1t L\u1EDBn"
+  color: 
   price: 100
   propertyPrice: 50
   rent: 060000001e0000005a0000000e0100009001000026020000
@@ -26278,8 +26314,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.88, y: -5}
-  m_SizeDelta: {x: 1.5, y: 0.5}
+  m_AnchoredPosition: {x: -1.88, y: -4.84}
+  m_SizeDelta: {x: 1.5, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2092192129
 CanvasRenderer:
@@ -26350,7 +26386,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e4d5517311fdf3f4389fdc8f0c893f25, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d5f478de5848a5f469faf0714aa4977e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

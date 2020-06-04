@@ -232,7 +232,7 @@ public class Player : MonoBehaviour
 
     public void declareBankrupt(Player beneficiary)
     {
-        Modal.instance().showModal(playerName + " đã phá sản do không có đủ khả năng chi trả! Mọi tài sản được chuyển cho " + beneficiary.playerName + ".", "OK", () => {
+        Modal.instance().showModal("<size=150%><color=#aa0115><b>Phá sản</b></color></size>\n<b>" + playerName + "</b> đã phá sản do không có đủ khả năng chi trả! Mọi tài sản được chuyển cho <b>" + beneficiary.playerName + "</b>.", "OK", () => {
             Board.instance().getBlockOwnedByPlayer(this).ForEach((block) => {
                 block.setOwner(beneficiary);
             });
@@ -246,9 +246,9 @@ public class Player : MonoBehaviour
 
     public void declareBankrupt(List<Player> beneficiaries)
     {
-        string text = playerName + " đã phá sản do không có đủ khả năng chi trả! Tổng tài sản được chia đều cho:\n";
+        string text = "<size=150%><color=#aa0115><b>Phá sản</b></color></size>\n<b>" + playerName + "</b> đã phá sản do không có đủ khả năng chi trả! Tổng tài sản được chia đều cho:\n";
         beneficiaries.ForEach((beneficiary) => {
-            text += "- " + beneficiary.playerName + "\n";
+            text += "- <b>" + beneficiary.playerName + "</b>\n";
         });
         Modal.instance().showModal(text, "OK", () => {
             Board.instance().getBlockOwnedByPlayer(this).ForEach((block) => {
@@ -267,7 +267,7 @@ public class Player : MonoBehaviour
 
     public void declareBankrupt()
     {
-        Modal.instance().showModal(playerName + " đã phá sản do không có đủ khả năng chi trả!", "OK", () => {
+        Modal.instance().showModal("<size=150%><color=#aa0115><b>Phá sản</b></color></size>\n<b>" + playerName + "</b> đã phá sản do không có đủ khả năng chi trả!", "OK", () => {
             bankrupt = true;
             Board.instance().getBlockOwnedByPlayer(this).ForEach((block) => {
                 block.setOwner(null);

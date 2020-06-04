@@ -25,6 +25,7 @@ public class GameOver : MonoBehaviour
     void Start()
     {
         playAgainButton.onClick.AddListener(() => {
+            Destroy(Modal.instance());
             UnityEngine.SceneManagement.SceneManager.LoadScene("GameSetting");
         });
         exitButton.onClick.AddListener(() => {

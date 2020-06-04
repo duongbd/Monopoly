@@ -146,7 +146,7 @@ public class InfoPanel : MonoBehaviour
         {
             amount = block.price / 2;
         }
-        Modal.instance().showModal("Bạn có chắc muốn bán " + block.blockName + " không? Bạn sẽ nhận được " + amount + "Đ.", "Có", "Không",
+        Modal.instance().showModal("Bạn có chắc muốn bán <color=" + block.color + "><b>" + block.blockName + "</b></color> không? Bạn sẽ nhận được <color=#216C2A><b>" + amount + "Đ</b></color>.", "Có", "Không",
             () =>
             {
                 GameController.playerInTurn().sell(block);
@@ -165,11 +165,11 @@ public class InfoPanel : MonoBehaviour
         string text;
         if (block.getProperties() < 5)
         {
-            text = "Bạn có chắc muốn bán nhà trên " + block.blockName + " với giá " + block.propertyPrice / 2 + "Đ không?";
+            text = "Bạn có chắc muốn bán nhà trên <color=" + block.color + "><b>" + block.blockName + "</b></color> với giá <color=#216C2A><b>" + block.propertyPrice / 2 + "Đ</b></color> không?";
         }
         else
         {
-            text = "Bạn có chắc muốn bán khách sạn trên " + block.blockName + " với giá " + block.propertyPrice / 2 + "Đ không?";
+            text = "Bạn có chắc muốn bán khách sạn trên <color=" + block.color + "><b>" + block.blockName + "</b></color> với giá <color=#216C2A><b>" + block.propertyPrice / 2 + "Đ</b></color> không?";
         }
         Modal.instance().showModal(text, "Có", "Không",
             () =>
@@ -193,11 +193,11 @@ public class InfoPanel : MonoBehaviour
             string text;
             if (block.getProperties() < 4)
             {
-                text = "Bạn có chắc muốn mua nhà trên " + block.blockName + " với giá " + block.propertyPrice + "Đ không?";
+                text = "Bạn có chắc muốn mua nhà trên <color=" + block.color + "><b>" + block.blockName + "</b></color> với giá <color=#aa0115><b>" + block.propertyPrice + "Đ</b></color> không?";
             }
             else
             {
-                text = "Bạn có chắc muốn mua khách sạn trên " + block.blockName + " với giá " + block.propertyPrice + "Đ không?";
+                text = "Bạn có chắc muốn mua khách sạn trên <color=" + block.color + "><b>" + block.blockName + "</b></color> với giá <color=#aa0115><b>" + block.propertyPrice + "Đ</b></color> không?";
             }
             Modal.instance().showModal(text, "Có", "Không",
                 () =>

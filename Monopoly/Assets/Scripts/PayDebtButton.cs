@@ -31,21 +31,21 @@ public class PayDebtButton : MonoBehaviour
         }
         Player player = GameController.playerInTurn();
         List<Player> creditors = new List<Player>();
-        string text = "Trả nợ: \n";
+        string text = "<size=150%><b>Trả nợ</b></size>\n";
         int sum = 0;
         player.getDebts().ForEach((debt) => {
             if (debt.creditor != null) {
                 creditors.Add(debt.creditor);
-                text += "- " + debt.creditor.playerName + ": " + debt.amount + "Đ";
+                text += "- <b>" + debt.creditor.playerName + "</b>: <i>" + debt.amount + "Đ</i>";
             }
-            else text += "- " + debt.amount + "Đ";
+            else text += "- <i>" + debt.amount + "Đ</i>";
             if (debt.note != null) {
                 text += " (" + debt.note + ")";
             }
             text += "\n";
             sum += debt.amount;
         });
-        text += "Tổng: " + sum + "Đ. Bạn có muốn trả không?";
+        text += "Tổng: <color=#aa0115><b>" + sum + "Đ</b></color>. ";
 
         if (player.getFund() < sum)
         {
@@ -57,12 +57,12 @@ public class PayDebtButton : MonoBehaviour
             }
             else
             {
-                Modal.instance().showModal("Bạn không đủ " + sum + "Đ trả nợ. Cần bán tài sản để tiếp tục!", "OK", () => { });
+                Modal.instance().showModal(text + "<i>Bạn không đủ tiền trả nợ. Cần bán tài sản để tiếp tục!</i>", "OK", () => { });
             }
         }
         else
         {
-            Modal.instance().showModal(text, "Có", "Không",
+            Modal.instance().showModal(text + "Bạn có muốn trả không?", "Có", "Không",
                 () => {
                     player.payDebts();
                 },

@@ -30,12 +30,12 @@ public class Tax : Block
             else
             {
                 player.debit(value, "Tiền thuế");
-                Modal.instance().showModal("Bạn không đủ " + value + "Đ trả thuế. Cần bán tài sản và trả nợ để tiếp tục!", "OK", () => { });
+                Modal.instance().showModal("<size=150%><color=#aa0115><b>" + blockName + "</b></color></size>\nBạn không đủ <color=#aa0115><b>" + value + "Đ</b></color> trả thuế. Cần bán tài sản và trả nợ để tiếp tục!", "OK", () => { });
             }
         }
         else
         {
-            Modal.instance().showModal("Ban phải trả thuế " + value + "Đ", "OK",
+            Modal.instance().showModal("<size=150%><color=#aa0115><b>" + blockName + "</b></color></size>\nBạn phải trả thuế <color=#aa0115><b>" + value + "Đ</b></color>", "OK",
                 () =>
                 {
                     player.pay(value);

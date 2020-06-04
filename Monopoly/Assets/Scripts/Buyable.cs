@@ -6,9 +6,44 @@ public abstract class Buyable : Block
 {
     private Player owner;
     private SpriteRenderer ownerStamp;
+    public string color;
     public int price;
     
     public abstract int calRent();
+
+    private void Awake()
+    {
+        switch (gameObject.tag)
+        {
+            case "Brown":
+                color = "#603c2d";
+                break;
+            case "Ocean":
+                color = "#59aaa9";
+                break;
+            case "Pink":
+                color = "#ff83d2";
+                break;
+            case "Orange":
+                color = "#fe8306";
+                break;
+            case "Red":
+                color = "#cc2c2f";
+                break;
+            case "Banana":
+                color = "#d5e024";
+                break;
+            case "Green":
+                color = "#669d1d";
+                break;
+            case "Sky":
+                color = "#328bcb";
+                break;
+            default:
+                color = "#00d8ff";
+                break;
+        }
+    }
 
     private void Start()
     {
@@ -40,7 +75,7 @@ public abstract class Buyable : Block
     {
         if (getOwner() == null)
         {
-            Modal.instance().showModal("Bạn đã đi vào " + blockName + ", không có chủ. Bạn có thể mua ô này.", "OK", () => { });
+            Modal.instance().showModal("<size=150%><color=" + color + "><b>" + blockName + "</b></color></size>\nBạn có thể mua ô này.", "OK", () => { });
         }
         else
         {
@@ -57,12 +92,12 @@ public abstract class Buyable : Block
                     else
                     {
                         player.debit(rent, owner, "Tiền thuê");
-                        Modal.instance().showModal("Bạn không đủ " + rent + "Đ thuê. Cần bán tài sản và trả nợ để tiếp tục!", "OK", () => { });
+                        Modal.instance().showModal("<size=150%><color=" + color + "><b>" + blockName + "</b></color></size>\nBạn đã đi vào ô của <b>" + owner.playerName + "</b>. Bạn không đủ <color=#aa0115><b>" + rent + "Đ</b></color> thuê. Cần bán tài sản và trả nợ để tiếp tục!", "OK", () => { });
                     }
                 }
                 else
                 {
-                    Modal.instance().showModal("Bạn đã đi vào ô của " + owner.playerName + " phải trả " + rent + "Đ", "OK",
+                    Modal.instance().showModal("<size=150%><color=" + color + "><b>" + blockName + "</b></color></size>\nBạn đã đi vào ô của <b>" + owner.playerName + "</b> phải trả <color=#aa0115><b>" + rent + "Đ</b></color>", "OK",
                         () => {
                             player.pay(owner, rent);
                         }
@@ -70,7 +105,7 @@ public abstract class Buyable : Block
                 }
             } else
             {
-                Modal.instance().showModal("Đây là ô của bạn, bạn có thể mua/bán tài sản hoặc KT lượt.", "OK", () => { });
+                Modal.instance().showModal("<size=150%><color=" + color + "><b>" + blockName + "</b></color></size>\nĐây là ô của bạn, bạn có thể mua/bán tài sản hoặc KT lượt.", "OK", () => { });
             }
         }
     }
@@ -80,6 +115,7 @@ public abstract class Buyable : Block
         if (owner != null)
         {
             ownerStamp.sprite = Resources.Load<Sprite>("Player/small " + GameController.getPlayerRepresentative(owner.represent));
+            iTween.PunchScale(ownerStamp.gameObject, iTween.Hash("x", 1.5, "y", 1.5, "time", 1));
         } else
         {
             ownerStamp.sprite = null;

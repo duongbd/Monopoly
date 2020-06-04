@@ -44,13 +44,13 @@ public class Modal : MonoBehaviour
     private TextMeshProUGUI text;
     private Queue<Message> messages;
     private Message? displayMessage;
+    private Vector3 position;
 
     public static Modal instance()
     {
         return modalController.GetComponent<Modal>();
     }
 
-    // Start is called before the first frame update
     void Awake()
     {
         messages = new Queue<Message>();
@@ -62,6 +62,7 @@ public class Modal : MonoBehaviour
         noButtonText = GameObject.Find("Modal/NoButton/NoButtonText").GetComponent<TextMeshProUGUI>();
         text = GameObject.Find("Modal/Text").GetComponent<TextMeshProUGUI>();
         modal.SetActive(false);
+        position = modal.transform.position;
     }
 
     void Update()
@@ -110,6 +111,8 @@ public class Modal : MonoBehaviour
         yesButton.SetActive(true);
         noButton.SetActive(true);
         modal.SetActive(true);
+        iTween.MoveFrom(modal, modal.transform.position + new Vector3(0, 200, 0), 1);
+        iTween.FadeFrom(modal, 0, 0.2f);
     }
 
     public void showModal(string modalText, string okText, UnityAction okEvent, bool prior = false)
@@ -137,6 +140,8 @@ public class Modal : MonoBehaviour
         yesButton.SetActive(false);
         noButton.SetActive(true);
         modal.SetActive(true);
+        iTween.MoveFrom(modal, modal.transform.position + new Vector3(0, 200, 0), 1);
+        iTween.FadeFrom(modal, 0, 0.2f);
     }
 
     private void closeModal()
@@ -144,6 +149,7 @@ public class Modal : MonoBehaviour
         modal.SetActive(false);
         displayMessage = null;
         GameController.waitModal = false;
+        if (iTween.Count(modal) == 0) modal.transform.position = position;
     }
 
     private void addToFrontOfQueue(Message mess)

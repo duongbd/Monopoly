@@ -18,6 +18,6 @@ public class ParkingLot : Block
 
     public override void activate()
     {
-        Debug.Log(blockName);
+        Modal.instance().showModal("<size=150%><b>" + blockName + "</b></size>\nBạn được đỗ xe miễn phí.", "OK", () => { });
     }
 }

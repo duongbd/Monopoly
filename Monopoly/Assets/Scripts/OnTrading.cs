@@ -20,6 +20,7 @@ public class OnTrading : MonoBehaviour
             active = true;
             if (GetComponent<RectTransform>().rect.width == 1.25) GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("UI/active block frame");
             else GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("UI/ver active block frame");
+            iTween.PunchRotation(gameObject, iTween.Hash("z", 10, "time", 1));
         } else
         {
             active = false;

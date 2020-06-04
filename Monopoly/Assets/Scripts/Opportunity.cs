@@ -30,7 +30,7 @@ public class Opportunity : Block
         switch (rand)
         {
             case 0:
-                Modal.instance().showModal("Cơ Hội:\nLùi 3 bước.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nLùi <b>3 bước</b>.", "OK", () => {
                     GameController.movePlayerInTurn(3, true);
                     steps = 0;
                     needActivation = true;
@@ -38,7 +38,7 @@ public class Opportunity : Block
                 break;
 
             case 1:
-                Modal.instance().showModal("Cơ Hội:\nBạn được bầu làm chủ tịch hội đồng quản trị, đưa cho mỗi người chơi 50Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nBạn được bầu làm chủ tịch hội đồng quản trị, đưa cho mỗi người chơi <color=#aa0115><b>50Đ</b></color>.", "OK", () => {
                     List<Player> otherPlayers = GameController.getPlayersNotInTurn();
                     Player playerInTurn = GameController.playerInTurn();
                     int sum = 50 * otherPlayers.Count;
@@ -53,7 +53,7 @@ public class Opportunity : Block
                             otherPlayers.ForEach((player) => {
                                 playerInTurn.debit(50, player);
                             });
-                            Modal.instance().showModal("Bạn không đủ " + sum + "Đ. Cần bán tài sản để trả!", "OK", () => { });
+                            Modal.instance().showModal("Bạn không đủ <color=#aa0115><b>" + sum + "Đ</b></color>. Cần bán tài sản để trả!", "OK", () => { });
                         }
                     }
                     else
@@ -66,7 +66,7 @@ public class Opportunity : Block
                 break;
 
             case 2:
-                Modal.instance().showModal("Cơ Hội:\nĐến nhà máy gần nhất. Nếu qua Khởi hành nhận 200Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nĐến nhà máy gần nhất. Nếu qua <color=#22c4ff><b>Khởi hành</b></color> nhận <color=#216C2A><b>200Đ</b></color>.", "OK", () => {
                     steps = 0;
                     while (Board.instance().getPlayerInTurnBlock().GetComponent<Factory>() == null) {
                         GameController.movePlayerInTurn(1);
@@ -77,13 +77,13 @@ public class Opportunity : Block
                 break;
 
             case 3:
-                Modal.instance().showModal("Cơ Hội:\nVào tù!", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\n<b>Vào tù</b>!", "OK", () => {
                     Board.instance().getBlock(30).activate();
                 });
                 break;
 
             case 4:
-                Modal.instance().showModal("Cơ Hội:\nĐến ga Hà Nội. Nếu đi qua Khởi hành nhận 200Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nĐến <color=#00d8ff><b>Ga Hà Nội</b></color>. Nếu đi qua <color=#22c4ff><b>Khởi hành</b></color> nhận <color=#216C2A><b>200Đ</b></color>.", "OK", () => {
                     steps = 0;
                     while (GameController.playerInTurn().position != 5)
                     {
@@ -95,7 +95,7 @@ public class Opportunity : Block
                 break;
 
             case 5:
-                Modal.instance().showModal("Cơ Hội:\nĐến Quảng trường Ba Đình. Nếu đi qua Khởi hành nhận 200Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nĐến <color=#ff83d2><b>Quảng trường Ba Đình</b></color>. Nếu đi qua <color=#22c4ff><b>Khởi hành</b></color> nhận <color=#216C2A><b>200Đ</b></color>.", "OK", () => {
                     steps = 0;
                     while (GameController.playerInTurn().position != 11)
                     {
@@ -107,7 +107,7 @@ public class Opportunity : Block
                 break;
 
             case 6:
-                Modal.instance().showModal("Cơ Hội:\nVề Khởi hành nhận 200Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nVề <color=#22c4ff><b>Khởi hành</b></color> nhận <color=#216C2A><b>200Đ</b></color>.", "OK", () => {
                     GameController.jumpPlayerInTurn(0);
                     steps = 0;
                     needActivation = true;
@@ -115,7 +115,7 @@ public class Opportunity : Block
                 break;
 
             case 7:
-                Modal.instance().showModal("Cơ Hội:\nĐến Phú Quốc.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nĐến <color=#328bcb><b>Phú Quốc</b></color>.", "OK", () => {
                     steps = 0;
                     while (GameController.playerInTurn().position != 39)
                     {
@@ -127,13 +127,13 @@ public class Opportunity : Block
                 break;
 
             case 8:
-                Modal.instance().showModal("Cơ Hội:\nĐến hạn thu tiền thuê nhà, nhận 200Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nĐến hạn thu tiền thuê nhà, nhận <color=#216C2A><b>200Đ</b></color>.", "OK", () => {
                     GameController.playerInTurn().addFund(200);
                 });
                 break;
 
             case 9:
-                Modal.instance().showModal("Cơ Hội:\nĐên Hội An. Nếu đi qua Khởi hành nhận 200Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nĐên <color=#cc2c2f><b>Hội An</b></color>. Nếu đi qua <color=#22c4ff><b>Khởi hành</b></color> nhận <color=#216C2A><b>200Đ</b></color>.", "OK", () => {
                     steps = 0;
                     while (GameController.playerInTurn().position != 24)
                     {
@@ -161,7 +161,7 @@ public class Opportunity : Block
                         }
                     }
                 });
-                Modal.instance().showModal("Cơ Hội:\nBảo trì nhà: với mỗi nhà trả 25Đ, mỗi khách sạn trả 100Đ. Tổng: " + fee + "Đ", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nBảo trì nhà: với mỗi nhà trả <b>25Đ</b>, mỗi khách sạn trả <b>100Đ</b>. Tổng: <color=#aa0115><b>" + fee + "Đ</b></color>", "OK", () => {
                     if (GameController.playerInTurn().getFund() < fee)
                     {
                         if (GameController.playerInTurn().calNetWorth() < fee)
@@ -171,7 +171,7 @@ public class Opportunity : Block
                         else
                         {
                             GameController.playerInTurn().debit(fee);
-                            Modal.instance().showModal("Bạn không đủ " + fee + "Đ. Cần bán tài sản để trả!", "OK", () => { });
+                            Modal.instance().showModal("Bạn không đủ <color=#aa0115><b>" + fee + "Đ</b></color>. Cần bán tài sản để trả!", "OK", () => { });
                         }
                     }
                     else
@@ -182,7 +182,7 @@ public class Opportunity : Block
                 break;
 
             case 11:
-                Modal.instance().showModal("Cơ Hội:\nĐến nhà ga gần nhất. Nếu qua Khởi hành nhận 200Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nĐến nhà ga gần nhất. Nếu qua <color=#22c4ff><b>Khởi hành</b></color> nhận <color=#216C2A><b>200Đ</b></color>.", "OK", () => {
                     steps = 0;
                     while (Board.instance().getPlayerInTurnBlock().GetComponent<Station>() == null)
                     {
@@ -194,7 +194,7 @@ public class Opportunity : Block
                 break;
 
             case 12:
-                Modal.instance().showModal("Cơ Hội:\nNộp thuế Đỗ Nghèo Khỉ 15Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nNộp thuế <i>Đỗ Nghèo Khỉ</i> <color=#aa0115><b>15Đ</b></color>.", "OK", () => {
                     if (GameController.playerInTurn().getFund() < 15)
                     {
                         if (GameController.playerInTurn().calNetWorth() < 15)
@@ -204,7 +204,7 @@ public class Opportunity : Block
                         else
                         {
                             GameController.playerInTurn().debit(15);
-                            Modal.instance().showModal("Bạn không đủ " + 15 + "Đ. Cần bán tài sản để trả!", "OK", () => { });
+                            Modal.instance().showModal("Bạn không đủ <color=#aa0115><b>" + 15 + "Đ</b></color>. Cần bán tài sản để trả!", "OK", () => { });
                         }
                     }
                     else
@@ -215,7 +215,7 @@ public class Opportunity : Block
                 break;
 
             case 13:
-                Modal.instance().showModal("Cơ Hội:\nNhận tiền lãi ngân hàng 50Đ.", "OK", () => {
+                Modal.instance().showModal("<size=150%><color=#523d7b><b>Cơ Hội:</b></color></size>\nNhận tiền lãi ngân hàng <color=#216C2A><b>50Đ</b></color>.", "OK", () => {
                     GameController.playerInTurn().addFund(50);
                 });
                 break;

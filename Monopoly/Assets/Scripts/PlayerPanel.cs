@@ -9,6 +9,10 @@ public class PlayerPanel : MonoBehaviour
     private TextMeshProUGUI fund;
     private TextMeshProUGUI netWorth;
     private GameObject bankrupt;
+    private int curFundValue;
+
+    public float time;
+    public iTween.EaseType easeType;
 
     private void Awake()
     {
@@ -26,12 +30,13 @@ public class PlayerPanel : MonoBehaviour
 
     public void setFund(int value)
     {
-        fund.SetText(value + "Đ");
+        curFundValue = value;
+        fund.SetText(value + "<color=#216C2A><b> Đ</b>");
     }
 
     public void setNetWorth(int value)
     {
-        netWorth.SetText(value + "Đ");
+        netWorth.SetText(value + "<color=#216C2A><b> Đ</b>");
     }
 
     public void updatePanel(string name, int fundValue, int netWorthValue)
@@ -43,12 +48,47 @@ public class PlayerPanel : MonoBehaviour
 
     public void updatePanel(int fundValue, int netWorthValue)
     {
-        setFund(fundValue);
-        setNetWorth(netWorthValue);
+        object prms = new object[] { fundValue - curFundValue, fundValue, netWorthValue };
+        StartCoroutine("changeFund", prms);
     }
 
     public void updateBankruptStatus()
     {
         bankrupt.SetActive(true);
+        iTween.PunchScale(bankrupt, iTween.Hash("x", 150, "y", 150, "time", 1));
+    }
+
+    private IEnumerator changeFund(object[] prms)
+    {
+        GameObject newGO = new GameObject("Change");
+        newGO.transform.SetParent(this.transform);
+        TextMeshProUGUI change;
+        change = newGO.AddComponent<TextMeshProUGUI>();
+        change.transform.position = fund.transform.position + new Vector3(10, 28, 0);
+        change.alignment = TextAlignmentOptions.Right;
+        change.fontStyle = FontStyles.Bold;
+        change.fontSize = 28f;
+
+        int changeVal = (int)prms[0];
+        int funVal = (int)prms[1];
+        int netWorthVal = (int)prms[2];
+
+        if (changeVal > 0)
+        {
+            change.SetText("+" + changeVal);
+            change.color = new Color32(33, 108, 42, 255);
+        }
+        else
+        {
+            change.SetText("-" + changeVal * (-1));
+            change.color = new Color32(170, 1, 20, 255);
+        }
+
+        iTween.MoveTo(change.gameObject, iTween.Hash("position", fund.transform.position, "easeType", easeType, "time", time));
+
+        yield return new WaitForSeconds(time);
+        Destroy(change.gameObject);
+        setFund(funVal);
+        setNetWorth(netWorthVal);
     }
 }

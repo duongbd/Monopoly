@@ -29,6 +29,8 @@ public class EndTurnButton : MonoBehaviour
             if (GameController.rolled == false || GameController.activated == false)
             {
                 Modal.instance().showModal("Bạn chưa đổ xúc xắc!!", "OK", () => { });
+                iTween.PunchRotation(GameObject.Find("RollButton"), iTween.Hash("z", 20, "time", 1));
+                iTween.PunchScale(GameObject.Find("RollButton"), iTween.Hash("x", 1.2, "y", 1.2, "time", 1));
             }
             else
             {
@@ -37,7 +39,7 @@ public class EndTurnButton : MonoBehaviour
                     Modal.instance().showModal("Bạn chưa trả nợ, hãy trả nợ để tiếp tục!", "OK", () => { });
                 } else
                 {
-                    Modal.instance().showModal("Bạn có chắc muốn kết thực lượt", "Có", "Không",
+                    Modal.instance().showModal("Bạn có chắc muốn kết thúc lượt", "Có", "Không",
                         () => {
                             GameController.endTurn();
                         },

@@ -26,7 +26,13 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        gameOver = false;
+        activated = false;
+        rollValue = 0;
+        rolled = false;
+        waitModal = false;
+        tradingMode = false;
+        turnLock = false;
         player = new Player[] {
             GameObject.Find("Player1").GetComponent<Player>(),
             GameObject.Find("Player2").GetComponent<Player>(),
@@ -73,7 +79,7 @@ public class GameController : MonoBehaviour
             playerPanel[i].updatePanel(player[i].playerName, player[i].getFund(), player[i].calNetWorth());
         }
         turn = 0;
-        //for (int i = 0; i<3; i++)
+        //for (int i = 0; i < 3; i++)
         //{
         //    player[i].declareBankrupt();
         //}
@@ -89,6 +95,7 @@ public class GameController : MonoBehaviour
         }
         if (dice[0].ifCoroutineAllowed() && dice[1].ifCoroutineAllowed() && rolled == false && rollValue > 0)
         {
+            StartCoroutine("displayRollValue");
             rolled = true;
             if (playerInTurn().inPrison >= 0)
             {
@@ -96,7 +103,7 @@ public class GameController : MonoBehaviour
                 if (dice[0].getDiceSideThrown() == dice[1].getDiceSideThrown())
                 {
                     playerInTurn().inPrison = -1;
-                    Modal.instance().showModal("Chúc mừng bạn đã được ra tù!", "OK", () => {
+                    Modal.instance().showModal("<size=150%><color=#00d8ff><b>Chúc mừng</b></color></size>\nBạn đã được ra tù do đổ được 2 mặt giống nhau!", "OK", () => {
                         rolled = false;
                         rollValue = 0;
                         activated = false;
@@ -145,7 +152,7 @@ public class GameController : MonoBehaviour
         {
             gameOver = true;
             chart.Push(playerInTurn().playerName);
-            Modal.instance().showModal("Game Over!", "OK", 
+            Modal.instance().showModal("<size=150%><color=#00d8ff><b>Game Over!", "OK", 
                 () => {
                     UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
                 },
@@ -167,23 +174,23 @@ public class GameController : MonoBehaviour
             item.resetDice();
         }
         tradingModeOff();
-        turnFrame.transform.position = playerPanel[turn].transform.position;
+        iTween.MoveTo(turnFrame, playerPanel[turn].transform.position, 1);
         rolled = false;
         rollValue = 0;
         activated = false;
         if (playerInTurn().inPrison == 0)
         {
             playerInTurn().inPrison = -1;
-            Modal.instance().showModal("Bạn đã được ra tù!", "OK", () => { });
+            Modal.instance().showModal("<size=150%><b>Hết 3 lượt trong tù</b></size>\nBạn đã được ra tù!", "OK", () => { });
         }
         if (playerInTurn().inPrison > 0)
         {
             playerInTurn().inPrison--;
-            Modal.instance().showModal("Bạn đang trong tù. Còn " + playerInTurn().inPrison + " lượt! Bạn có thể trả 50Đ để ra ngay hoặc đổ xúc xắc.", "Trả 50Đ", "Đổ xúc xắc", 
+            Modal.instance().showModal("<size=150%><b>Trong tù</b></size>\nCòn <b>" + playerInTurn().inPrison + " lượt</b>! Bạn có thể trả <color=#aa0115><b>50Đ</b></color> để ra ngay hoặc đổ xúc xắc.", "Trả <color=#aa0115><b>50Đ</b></color>", "Đổ xúc xắc", 
                 () => {
                     if (playerInTurn().getFund() < 50)
                     {
-                        Modal.instance().showModal("Bạn không có đủ 50Đ tiền mặt!", "Đổ xúc xắc",
+                        Modal.instance().showModal("Bạn không có đủ <color=#aa0115><b>50Đ</b></color> tiền mặt!", "Đổ xúc xắc",
                             () =>
                             {
                                 rollTheDice();
@@ -193,6 +200,7 @@ public class GameController : MonoBehaviour
                     {
                         playerInTurn().inPrison = -1;
                         playerInTurn().pay(50);
+                        Modal.instance().showModal("Bạn đã được ra tù!", "OK", () => { });
                     }
                 },
                 () => {
@@ -279,31 +287,32 @@ public class GameController : MonoBehaviour
         {
             activated = true;
             rolled = true;
-            Modal.instance().showModal("Đổ xúc xắc xác định lượt.\n" +
-                "- " + player[0].playerName + ": " + values[0] + "\n" +
-                "- " + player[1].playerName + ": " + values[1] + "\n" +
-                "- " + player[2].playerName + ": " + values[2] + "\n" +
-                "- " + player[3].playerName + ": " + values[3] + "\n",
+            Modal.instance().showModal("<size=150%><b>Xác định lượt</b></size>\n" +
+                "- " + player[0].playerName + ": <i>" + values[0] + "</i>\n" +
+                "- " + player[1].playerName + ": <i>" + values[1] + "</i>\n" +
+                "- " + player[2].playerName + ": <i>" + values[2] + "</i>\n" +
+                "- " + player[3].playerName + ": <i>" + values[3] + "</i>\n",
                 "Đổ xúc xắc",
                 () => {
                     rollTheDice();
                 }
             );
             yield return new WaitUntil(() => dice[0].ifCoroutineAllowed() && dice[1].ifCoroutineAllowed() && rollValue > 0);
+            StartCoroutine("displayRollValue");
             values[turn] = rollValue;
             endTurn();
         }
         System.Array.Sort(values, player, new myCompare());
         for (int i = 0; i < player.Length; i++)
         {
-            avatar[player[i].represent].transform.position = playerPanel[i].transform.position + new Vector3(-129, 50, 0);
+            iTween.MoveTo(avatar[player[i].represent], playerPanel[i].transform.position + new Vector3(-129, 50, 0), 1);
             playerPanel[i].updatePanel(player[i].playerName, player[i].getFund(), player[i].calNetWorth());
         }
-        Modal.instance().showModal("Thứ tự chơi:\n" +
-                "1. " + player[0].playerName + ": " + values[0] + "\n" +
-                "2. " + player[1].playerName + ": " + values[1] + "\n" +
-                "3. " + player[2].playerName + ": " + values[2] + "\n" +
-                "4. " + player[3].playerName + ": " + values[3] + "\n",
+        Modal.instance().showModal("<size=150%><b>Thứ tự chơi</b></size>\n" +
+                "<b>1.</b> " + player[0].playerName + ": <i>" + values[0] + "</i>\n" +
+                "<b>2.</b> " + player[1].playerName + ": <i>" + values[1] + "</i>\n" +
+                "<b>3.</b> " + player[2].playerName + ": <i>" + values[2] + "</i>\n" +
+                "<b>4.</b> " + player[3].playerName + ": <i>" + values[3] + "</i>\n",
                 "OK",
                 () => {
                 }
@@ -323,6 +332,25 @@ public class GameController : MonoBehaviour
         }
         return count;
     }
+
+    private IEnumerator displayRollValue()
+    {
+        GameObject newGO = new GameObject("RollValue");
+        newGO.transform.SetParent(Board.instance().transform);
+        TextMeshProUGUI valText = newGO.AddComponent<TextMeshProUGUI>();
+        valText.transform.position = Board.instance().transform.position + new Vector3(0, 270, 0);
+        valText.alignment = TextAlignmentOptions.Center;
+        valText.fontStyle = FontStyles.Bold;
+        valText.fontSize = 150f;
+        valText.color = new Color32(0, 216, 255, 255);
+        valText.SetText(rollValue.ToString());
+
+        iTween.PunchScale(valText.gameObject, iTween.Hash("x", 0.015, "y", 0.015, "time", 1));
+
+        yield return new WaitForSeconds(1.5f);
+
+        Destroy(valText.gameObject);
+    }
 }
 
 public class myCompare : IComparer<int>
@@ -332,3 +360,4 @@ public class myCompare : IComparer<int>
         return y - x;
     }
 }
+
